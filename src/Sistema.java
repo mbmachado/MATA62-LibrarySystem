@@ -1,6 +1,5 @@
 package src;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Sistema {
 
@@ -9,12 +8,20 @@ public class Sistema {
 
     public Sistema() {
 //        TODO inicializar os comandos
+        comandos.put("emp", new ComandoEmprestar());
+        comandos.put("dev", new ComandoDevolver());
+        comandos.put("res", new ComandoReservar());
+        comandos.put("obs", new ComandoObservar());
+        comandos.put("liv", new ComandoInfoLivro());
+        comandos.put("usu", new ComandoInfoUsuario());
+        comandos.put("ntf", new ComandoNotificacao());
+        comandos.put("sai", new ComandoSair());
     }
 
+//    TODO adiconar comandos ao map
 
-
-    public static Command  getCommand(String command) {
-        return comandos.get(command);
+    public static void  getCommand(String command) {
+         comandos.get(command).execute();
     }
 
 
