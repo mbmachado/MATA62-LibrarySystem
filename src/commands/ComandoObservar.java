@@ -1,6 +1,6 @@
-package src;
+package src.commands;
 
-public class ComandoSair implements Command {
+public class ComandoObservar implements Command {
     public  void execute(){
 //        TODO fazer o método execute
     }

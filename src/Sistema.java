@@ -1,4 +1,6 @@
 package src;
+import src.commands.*;
+
 import java.util.HashMap;
 
 public class Sistema {

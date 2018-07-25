@@ -1,6 +1,6 @@
-package src;
+package src.commands;
 
-public class ComandoDevolver implements Command {
+public class ComandoEmprestar implements Command {
     public  void execute(){
 //        TODO fazer o método execute
     }

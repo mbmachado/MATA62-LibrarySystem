@@ -1,6 +1,6 @@
-package src;
+package src.commands;
 
-public class ComandoNotificacao implements Command {
+public class ComandoSair implements Command {
     public  void execute(){
 //        TODO fazer o método execute
     }
