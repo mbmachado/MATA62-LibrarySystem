@@ -2,6 +2,7 @@ package src;
 import src.commands.*;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Sistema {
 
@@ -9,7 +10,6 @@ public class Sistema {
 
 
     public Sistema() {
-//        TODO inicializar os comandos
         comandos.put("emp", new ComandoEmprestar());
         comandos.put("dev", new ComandoDevolver());
         comandos.put("res", new ComandoReservar());
@@ -20,7 +20,6 @@ public class Sistema {
         comandos.put("sai", new ComandoSair());
     }
 
-//    TODO adiconar comandos ao map
 
     public static void  getCommand(String command) {
          comandos.get(command).execute();
@@ -28,6 +27,11 @@ public class Sistema {
 
 
 	public static void main(String[] args) {
+        Sistema sis = new Sistema();
+        Scanner sc = new Scanner(System.in);
+        String c = sc.next();
+
+        getCommand(c);
 
 	}
 
