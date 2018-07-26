@@ -195,5 +195,7 @@ public class Livro implements Subject {
         }
 
         //TODO exibir exemplares aqui
+        System.out.println("Exemplares");
+        exemplares.forEach(e -> System.out.println(e));
     }
 }

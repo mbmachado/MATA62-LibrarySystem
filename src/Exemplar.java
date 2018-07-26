@@ -45,4 +45,9 @@ public class Exemplar {
 	public int getID() {
 		return ID;
 	}
+
+    public String toString() {
+	    return "Código do livro: " + this.livro.getCodigo() + ", Código do Exemplar: " + this.ID + ", Status: "
+                + this.status;
+    }
 }

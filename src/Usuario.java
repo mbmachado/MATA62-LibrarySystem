@@ -39,15 +39,18 @@ public abstract class Usuario {
 	public boolean jaPossuiEmprestimo(Exemplar exemplar) {
 		boolean emprestado = false;
 		for (int i = 0; i < emprestimos.size(); i++) {
-			Emprestimo emprestimo = emprestimos.get(i);
-			if(emprestimo.jaRealizado(exemplar)) {
-				emprestado = true;
-				break;
-			}
-		if(emprestimos.get(i).getDataDevolucaoReal() == null) {
-			emprestimos.get(i).setDataDevolucaoPrevista(LocalDate.now());
-		}
-		return emprestado;
+            Emprestimo emprestimo = emprestimos.get(i);
+            if (emprestimo.jaRealizado(exemplar)) {
+                emprestado = true;
+                break;
+            }
+            // TODO verificar se esse if é dentro do FOR
+            if (emprestimos.get(i).getDataDevolucaoReal() == null) {
+                emprestimos.get(i).setDataDevolucaoPrevista(LocalDate.now());
+            }
+        }
+
+        return emprestado;
 	}
 	
 	public int numeroEmprestimosAtivos() {
@@ -107,15 +110,20 @@ public abstract class Usuario {
 		return contador;
 	}
 	
-	public void fazerReserva(Livro livro, LocalDate data) {
-		if(reservas.size() <= MAX_RESERVAS) {
-			Reserva reserva = new Reserva(data, this, livro);
-			this.adicionarReserva(reserva);
-			livro.adicionarReserva(reserva);
-			System.out.println("Reserva criada com sucesso!");
-		} else {
-			System.out.println("N�o foi poss�vel reservar, pois o limite de reservas foi atingido!");
-		}
+	public void fazerReserva(Livro livro){
+        if (reservas.size() <= MAX_RESERVAS) {
+            LocalDate data = LocalDate.now();
+            Reserva reserva = new Reserva(data, this, livro);
+            this.adicionarReserva(reserva);
+            livro.adicionarReserva(reserva);
+            System.out.println("Reserva criada com sucesso!");
+        }
+
+        else {
+            System.out.println("N�o foi poss�vel reservar, pois o limite de reservas foi atingido!");
+        }
+
+    }
 
 	
 	public void removerReserva(Reserva reserva) {
@@ -125,36 +133,27 @@ public abstract class Usuario {
 		}
 	}
 	
-	public void adicionarReserva(Reserva reserva) {
-		reservas.add(reserva);
-	}
-	
+	public void adicionarReserva(Reserva reserva) {reservas.add(reserva);}
+
+
 	public void fazerDevolucao(Livro livro) {
 		ArrayList<Exemplar> exemplares = livro.getExemplares();
 		ArrayList<Emprestimo> emprestimosAtivos = this.obterEmprestimosAtivos();
 		boolean devolvido = false;
 
 		for (int i = 0; i < emprestimosAtivos.size(); i++) {
-			Emprestimo emprestimo = emprestimos.get(i);
-			for (int j = 0; j < exemplares.size(); j++) {
-				Exemplar exemplar = exemplares.get(i);
-				
-				if(emprestimo.getExemplar().equals(exemplar)) {
-					emprestimo.setDataDevolucaoReal(LocalDate.now());
-					exemplar.setStatus("disponivel");
-					devolvido = true;
-					break;
-				}
-	public ArrayList<Emprestimo> obterEmprestimosEmAtraso() {
-		ArrayList<Emprestimo> emprestimosEmAtraso = new ArrayList();
-		// TODO mudar esse método para suportar a classe LocalDate
-		Date today = new Date();
-		for (int i = 0; i < emprestimos.size(); i++) {
-			Emprestimo emprestimoAtrasado = emprestimos.get(i);
-			if(emprestimoAtrasado.getDataDevolucaoPrevista().before(today)) {
-				emprestimosEmAtraso.add(emprestimoAtrasado);
-			}
-		}
+            Emprestimo emprestimo = emprestimos.get(i);
+            for (int j = 0; j < exemplares.size(); j++) {
+                Exemplar exemplar = exemplares.get(i);
+
+                if (emprestimo.getExemplar().equals(exemplar)) {
+                    emprestimo.setDataDevolucaoReal(LocalDate.now());
+                    exemplar.setStatus("disponivel");
+                    devolvido = true;
+                    break;
+                }
+            }
+        }
 		if(devolvido) {
 			System.out.println("Exemplar do livro devolvido!");
 		} else {

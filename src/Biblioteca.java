@@ -25,14 +25,7 @@ public class Biblioteca {
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
 
-        try {
-            LocalDate now = LocalDate.now();
-            u.adicionarReserva(u.fazerReserva(l, now));
-            System.out.println("Reserva realizada com sucesso.");
-
-        }catch (OutOfMemoryError e){
-            System.out.println("Limite de reservas excedido.");
-        }
+        u.fazerReserva()
 
         return true;
     }

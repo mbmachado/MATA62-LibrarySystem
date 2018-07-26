@@ -9,7 +9,7 @@ public class Emprestimo {
 	private LocalDate dataEmprestimo;
 	private LocalDate dataDevolucaoPrevista;
 	private LocalDate dataDevolucaoReal;
-	
+
 	public Emprestimo(Exemplar exemplar, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucaoPrevista, LocalDate dataDevolucaoReal) {
 		this.exemplar = exemplar;
 		this.usuario = usuario;
@@ -68,16 +68,19 @@ public class Emprestimo {
 	}
 
 	public String toString() {
-
-	    String data;
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    String dataDevolucao;
 
 	    if(dataDevolucaoReal == null) {
-            data = "Data devolução prevista: " + dataDevolucaoPrevista.format(DateTimeFormatter.ofPattern(dateFormart));
+            dataDevolucao = "Data devolução prevista: " + dataDevolucaoPrevista.format(dateFormat);
         } else {
-	        data = "Data de devolução: " + dataDevolucaoReal.format(DateTimeFormatter.ofPattern(dateFormart));
+	        dataDevolucao = "Data de devolução: " + dataDevolucaoReal.format(dateFormat);
         }
-	    return "Título: " + exemplar.getLivro().getTitulo() + ", Data do emprestimo: " +
-                dataEmprestimo.format(DateTimeFormatter.ofPattern(dateFormart)) + ", Status: " + exemplar.getStatus() +
-                data;
+
+        String titulo = "Título: " + exemplar.getLivro().getTitulo();
+	    String dataEmprestimo = ", Data do emprestimo: " + this.dataEmprestimo.format(dateFormat);
+        String status = ", Status: " + exemplar.getStatus();
+
+        return titulo + dataEmprestimo + status + dataDevolucao;
     }
 }
