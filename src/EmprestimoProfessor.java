@@ -13,6 +13,7 @@ public class EmprestimoProfessor implements ComportamentoEmprestar {
 			if(indiceExemplarDisponivel != -1) { // Há exemplar disponível?
 				exemplar = livro.obterExemplarParaEmprestimo(indiceExemplarDisponivel);
 				if(usuario.jaPossuiEmprestimo(exemplar)) {
+					exemplar.setStatus("disponivel");
 					System.out.println("Não foi possível efetuar emprestimo. Um Exemplar do livro já se encontra em emprestimo!");
 				} else {
 					Emprestimo emprestimo = new Emprestimo(exemplar, usuario, LocalDate.now(), LocalDate.now().plusDays(usuario.getTempoDeEmprestimo()), null);

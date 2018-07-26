@@ -7,6 +7,7 @@ public abstract class Usuario {
 	protected String nome;
 	protected int codigo;
 	protected ComportamentoEmprestar ce;
+	protected final int MAX_RESERVAS = 3; 
 	
 	public Usuario(String nome, int codigo) {
 		this.nome = nome;
@@ -43,12 +44,45 @@ public abstract class Usuario {
 		return emprestado;
 	}
 	
+	public int numeroEmprestimosAtivos() {
+		int contador = 0;
+		for (int i = 0; i < emprestimos.size(); i++) {
+			Emprestimo emprestimo = emprestimos.get(i);
+			if(emprestimo.getDataDevolucaoReal().equals(null)) {
+				contador++;
+			}
+		}
+		return contador;
+	}
+	
+	public ArrayList<Emprestimo> obterEmprestimosAtivos() {
+		ArrayList<Emprestimo> emprestimosAtivos = new ArrayList<Emprestimo>();
+		for (int i = 0; i < emprestimos.size(); i++) {
+			Emprestimo emprestimo = emprestimos.get(i);
+			if(emprestimo.getDataDevolucaoReal().equals(null)) {
+				emprestimosAtivos.add(emprestimo);
+			}
+		}
+		return emprestimosAtivos;
+	}
+	
+	public ArrayList<Emprestimo> obterEmprestimosPassados() {
+		ArrayList<Emprestimo> emprestimosPassados = new ArrayList<Emprestimo>();
+		for (int i = 0; i < emprestimos.size(); i++) {
+			Emprestimo emprestimo = emprestimos.get(i);
+			if(!emprestimo.getDataDevolucaoReal().equals(null)) {
+				emprestimosPassados.add(emprestimo);
+			}
+		}
+		return emprestimosPassados;
+	}
+	
 	public ArrayList<Emprestimo> obterEmprestimosEmAtraso() {
 		ArrayList<Emprestimo> emprestimosEmAtraso = new ArrayList<Emprestimo>();
 		LocalDate today = LocalDate.now();
 		for (int i = 0; i < emprestimos.size(); i++) {
 			Emprestimo emprestimoAtrasado = emprestimos.get(i);
-			if(emprestimoAtrasado.getDataDevolucaoPrevista().isBefore(today)) {
+			if(emprestimoAtrasado.getDataDevolucaoPrevista().isBefore(today) && emprestimoAtrasado.getDataDevolucaoReal().equals(null)) {
 				emprestimosEmAtraso.add(emprestimoAtrasado);
 			}
 		}
@@ -60,15 +94,22 @@ public abstract class Usuario {
 		int contador = 0;
 		for (int i = 0; i < emprestimos.size(); i++) {
 			Emprestimo emprestimoAtrasado = emprestimos.get(i);
-			if(emprestimoAtrasado.getDataDevolucaoPrevista().isBefore(today)) {
+			if(emprestimoAtrasado.getDataDevolucaoPrevista().isBefore(today) && emprestimoAtrasado.getDataDevolucaoReal().equals(null)) {
 				contador++;
 			}
 		}
 		return contador;
 	}
 	
-	public Reserva fazerReserva(Livro livro, LocalDate data) {
-		return new Reserva(data, this, livro);
+	public void fazerReserva(Livro livro, LocalDate data) {
+		if(reservas.size() <= MAX_RESERVAS) {
+			Reserva reserva = new Reserva(data, this, livro);
+			this.adicionarReserva(reserva);
+			livro.adicionarReserva(reserva);
+			System.out.println("Reserva criada com sucesso!");
+		} else {
+			System.out.println("Não foi possível reservar, pois o limite de reservas foi atingido!");
+		}
 	}
 	
 	public void removerReserva(Reserva reserva) {
@@ -82,10 +123,47 @@ public abstract class Usuario {
 		reservas.add(reserva);
 	}
 	
-	public void fazerDevolucao(Emprestimo emprestimo) {
-		int i = emprestimos.indexOf(emprestimo);
-		if(emprestimos.get(i).getDataDevolucaoReal() == null) {
-			emprestimos.get(i).setDataDevolucaoReal(LocalDate.now());
+	public void fazerDevolucao(Livro livro) {
+		ArrayList<Exemplar> exemplares = livro.getExemplares();
+		ArrayList<Emprestimo> emprestimosAtivos = this.obterEmprestimosAtivos();
+		boolean devolvido = false;
+
+		for (int i = 0; i < emprestimosAtivos.size(); i++) {
+			Emprestimo emprestimo = emprestimos.get(i);
+			for (int j = 0; j < exemplares.size(); j++) {
+				Exemplar exemplar = exemplares.get(i);
+				
+				if(emprestimo.getExemplar().equals(exemplar)) {
+					emprestimo.setDataDevolucaoReal(LocalDate.now());
+					exemplar.setStatus("disponivel");
+					devolvido = true;
+					break;
+				}
+			}
+		}
+		if(devolvido) {
+			System.out.println("Exemplar do livro devolvido!");
+		} else {
+			System.out.println("Não foi possível devolver, pois nunhum exemplar do livro foi emprestado!");
+		}
+	}
+	
+	public void informacoes() {
+		ArrayList<Emprestimo> ativos = obterEmprestimosAtivos();
+		ArrayList<Emprestimo> passados = obterEmprestimosPassados();
+		
+		System.out.println("Usuário: "+nome);
+		if(!ativos.isEmpty()) {
+			System.out.println("Emprestimos Ativos");
+			System.out.println(ativos);
+		}
+		if(!passados.isEmpty()) {
+			System.out.println("Emprestimos Passados");
+			System.out.println(passados);
+		}
+		if(!reservas.isEmpty()) {
+			System.out.println("Reservas");
+			System.out.println(reservas);
 		}
 	}
 

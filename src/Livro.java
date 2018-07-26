@@ -63,6 +63,9 @@ public class Livro implements Subject {
 	
 	public void adicionarReserva(Reserva reserva) {
 		reservas.add(reserva);
+		if(getReservas().size() > 2) {
+			notifyObservers();
+		}
 	}
 	
 	public void removerReserva(Reserva reserva) {
@@ -87,6 +90,19 @@ public class Livro implements Subject {
 		}
 	}
 	
+	public void informacoes() {
+		System.out.println("Título: "+titulo);
+		System.out.println("Quantidade de reservas: "+reservas.size());
+		if(!reservas.isEmpty()) {
+			System.out.println("Reservas");
+			System.out.println(reservas);
+		}
+		if(!exemplares.isEmpty()) {
+			System.out.println("Exemplares");
+			System.out.println(exemplares);
+		}
+	}
+	
 	@Override
 	public void registerObserver(Observer o) {
 		observers.add(o);
@@ -105,7 +121,7 @@ public class Livro implements Subject {
 	public void notifyObservers() {
 		for (int i = 0; i < observers.size(); i++) {
 			Observer observer = observers.get(i);
-			observer.update(this);
+			observer.update();
 		}
 	}
 
