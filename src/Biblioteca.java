@@ -2,6 +2,7 @@ package src;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
+import src.Exemplar;
 
 public class Biblioteca {
 
@@ -26,7 +27,7 @@ public class Biblioteca {
 
         try {
             LocalDate now = LocalDate.now();
-            u.fazerReserva(l, now);
+            u.adicionarReserva(u.fazerReserva(l, now));
 
         }catch (OutOfMemoryError e){
             System.out.println("Limite de reservas excedido.");
@@ -41,6 +42,14 @@ public class Biblioteca {
 
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
+//        ArrayList<Exemplar> exemplares = l.getExemplares();
+//
+//        Exemplar exemplarDisponivel = exemplares.stream()
+//                .filter(e -> e.getStatus().equals("Disponível"))
+//                .findAny()
+//                .orElse(null);
+
+        u.fazerEmprestimo(l);
 
     }
 

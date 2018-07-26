@@ -1,5 +1,5 @@
 package src;
 
 public interface ComportamentoEmprestar {
-	public void fazerEmprestimo();
+	public void fazerEmprestimo(Livro livro, Usuario usuario);
 }

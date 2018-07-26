@@ -1,8 +1,8 @@
 package src;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 public abstract class Usuario {
 	protected ArrayList<Reserva> reservas;
@@ -17,14 +17,15 @@ public abstract class Usuario {
 		this.reservas = new ArrayList<Reserva>(3);
 	}
 	
-	public void fazerEmprestimo() {
-		ce.fazerEmprestimo();
+	public void fazerEmprestimo(Livro livro) {
+	    // TODO adicionar parametros
+		ce.fazerEmprestimo(livro, this);
 	}
 	
 	public void fazerDevolucao(Emprestimo emprestimo) {
 		int i = emprestimos.indexOf(emprestimo);
 		if(emprestimos.get(i).getDataDevolucaoReal() == null) {
-			emprestimos.get(i).setDataDevolucaoPrevista(new Date());
+			emprestimos.get(i).setDataDevolucaoPrevista(LocalDate.now());
 		}
 	}
 	
@@ -45,6 +46,7 @@ public abstract class Usuario {
 	
 	public ArrayList<Emprestimo> obterEmprestimosEmAtraso() {
 		ArrayList<Emprestimo> emprestimosEmAtraso = new ArrayList();
+		// TODO mudar esse método para suportar a classe LocalDate
 		Date today = new Date();
 		for (int i = 0; i < emprestimos.size(); i++) {
 			Emprestimo emprestimoAtrasado = emprestimos.get(i);
