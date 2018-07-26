@@ -2,12 +2,12 @@ package commands;
 import main.*;
 
 public class ComandoReservar implements Command {
-    public  boolean execute(String parametros){
+    public  void execute(String parametros){
         String[] exploded = parametros.split(" ");
         int codigoUsuario = Integer.parseInt(exploded[0]);
         int codigoLivro = Integer.parseInt(exploded[1]);
 
-       return Biblioteca.getInstancia().reservar(codigoUsuario, codigoLivro);
+        Biblioteca.getInstancia().reservar(codigoUsuario, codigoLivro);
 
 
     }

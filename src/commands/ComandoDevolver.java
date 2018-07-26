@@ -2,13 +2,12 @@ package commands;
 import main.*;
 
 public class ComandoDevolver implements Command {
-    public  boolean execute(String parametro){
-        // TODO fazer o método execute
+    public  void execute(String parametro){
         String[] exploded = parametro.split(" ");
         int codigoUsuario = Integer.parseInt(exploded[0]);
         int codigoLivro = Integer.parseInt(exploded[1]);
 
-       return Biblioteca.getInstancia().devolver(codigoUsuario, codigoLivro);
+        Biblioteca.getInstancia().devolver(codigoUsuario, codigoLivro);
 
     }
 }

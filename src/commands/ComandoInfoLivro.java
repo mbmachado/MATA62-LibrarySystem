@@ -2,11 +2,10 @@ package commands;
 import main.*;
 
 public class ComandoInfoLivro implements Command {
-    public  boolean execute(String parametro){
-        // TODO fazer o método execute
+    public  void execute(String parametro){
 
         int codigoLivro = Integer.parseInt(parametro);
-        return Biblioteca.getInstancia().infoLivro(codigoLivro);
+        Biblioteca.getInstancia().infoLivro(codigoLivro);
 
     }
 }
