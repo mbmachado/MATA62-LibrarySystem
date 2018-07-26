@@ -13,6 +13,7 @@ public abstract class Usuario {
 	public Usuario(String nome, int codigo) {
 		this.nome = nome;
 		this.codigo = codigo;
+		this.reservas = new ArrayList<Reserva>(3);
 	}
 	
 	public void fazerEmprestimo() {

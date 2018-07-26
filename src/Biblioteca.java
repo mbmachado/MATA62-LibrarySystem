@@ -19,7 +19,12 @@ public class Biblioteca {
         return instancia;
     }
 
-    public void reservar() {}
+    public void reservar(int codigoUsuario, int codigoLivro) {
+        Livro l = this.obterLivro(codigoLivro);
+        Usuario u = this.obterUsuario(codigoUsuario);
+
+
+    }
 
     public void devolver() {}
 
@@ -30,16 +35,15 @@ public class Biblioteca {
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
 
-
-
-
     }
 
     public void infoLivro() {}
 
     public void notificacao(){}
 
-    public void sair(){}
+    public boolean sair(){
+        return false;
+    }
 
     private  Livro obterLivro(int codigoLivro) {
         Optional<Livro> livro =  livros.stream().filter(l -> l.getCodigo() == codigoLivro).findFirst();
