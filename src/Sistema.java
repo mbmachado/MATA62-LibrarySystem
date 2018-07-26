@@ -35,12 +35,15 @@ public class Sistema {
 	public static void main(String[] args) {
         Sistema sis = new Sistema();
         Scanner sc = new Scanner(System.in);
-        String c = sc.next();
 
         // TODO fazer while enquando o comando não for sair
 
+        while (true) {
+            String c = sc.next();
+            if(getCommand(c) == false)
+                break;
 
-        getCommand(c);
+        }
 
 	}
 
