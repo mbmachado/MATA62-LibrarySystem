@@ -14,6 +14,7 @@ public abstract class Usuario {
 		this.nome = nome;
 		this.codigo = codigo;
 		this.reservas = new ArrayList<Reserva>(MAX_RESERVAS);
+		Biblioteca.getInstancia().addUsuario(this);
 	}
 	
 
@@ -34,19 +35,15 @@ public abstract class Usuario {
 	}
 	
 	public boolean jaPossuiEmprestimo(Exemplar exemplar) {
+		ArrayList<Emprestimo> emprestimosAtivos = new ArrayList<Emprestimo>();
 		boolean emprestado = false;
-		for (int i = 0; i < emprestimos.size(); i++) {
-            Emprestimo emprestimo = emprestimos.get(i);
+		
+		for (int i = 0; i < emprestimosAtivos.size(); i++) {
+            Emprestimo emprestimo = emprestimosAtivos.get(i);
             if (emprestimo.jaRealizado(exemplar)) {
                 emprestado = true;
                 break;
             }
-            // TODO verificar se esse if Ã© dentro do FOR 
-            /*
-            if (emprestimos.get(i).getDataDevolucaoReal() == null) {
-            //    emprestimos.get(i).setDataDevolucaoPrevista(LocalDate.now());
-            } 
-            */
         }
 
         return emprestado;
@@ -56,7 +53,7 @@ public abstract class Usuario {
 		int contador = 0;
 		for (int i = 0; i < emprestimos.size(); i++) {
 			Emprestimo emprestimo = emprestimos.get(i);
-			if(emprestimo.getDataDevolucaoReal().equals(null)) {
+			if(emprestimo.getDataDevolucaoReal() == null) {
 				contador++;
 			}
 		}
@@ -67,7 +64,7 @@ public abstract class Usuario {
 		ArrayList<Emprestimo> emprestimosAtivos = new ArrayList<Emprestimo>();
 		for (int i = 0; i < emprestimos.size(); i++) {
 			Emprestimo emprestimo = emprestimos.get(i);
-			if(emprestimo.getDataDevolucaoReal().equals(null)) {
+			if(emprestimo.getDataDevolucaoReal() == null) {
 				emprestimosAtivos.add(emprestimo);
 			}
 		}
@@ -78,7 +75,7 @@ public abstract class Usuario {
 		ArrayList<Emprestimo> emprestimosPassados = new ArrayList<Emprestimo>();
 		for (int i = 0; i < emprestimos.size(); i++) {
 			Emprestimo emprestimo = emprestimos.get(i);
-			if(!emprestimo.getDataDevolucaoReal().equals(null)) {
+			if(emprestimo.getDataDevolucaoReal() != null) {
 				emprestimosPassados.add(emprestimo);
 			}
 		}
@@ -110,15 +107,25 @@ public abstract class Usuario {
 	}
 	
 	public void fazerReserva(Livro livro){
-        if (reservas.size() <= MAX_RESERVAS) {
-            LocalDate data = LocalDate.now();
-            Reserva reserva = new Reserva(data, this, livro);
-            this.adicionarReserva(reserva);
-            livro.adicionarReserva(reserva);
-            System.out.println("Reserva criada com sucesso!");
-        }
-
-        else {
+        ArrayList<Emprestimo> emprestimosAtivos = obterEmprestimosAtivos();
+		if (reservas.size() <= MAX_RESERVAS) {
+            
+            if(emprestimosAtivos.stream().filter(e -> e.getExemplar().getLivro().equals(livro)).findAny().orElse(null) == null) {
+            	
+            	if (livro.numeroDeExemplaresDisponiveis() < livro.getReservas().size()) {
+	            	LocalDate data = LocalDate.now();
+	                Reserva reserva = new Reserva(data, this, livro);
+	            	this.adicionarReserva(reserva);
+	            	livro.adicionarReserva(reserva);
+	            	System.out.println("Reserva criada com sucesso!");
+            	} else {
+            		System.out.println("Não foi possível reservar, todos os exemplares foram reservados");
+            	}
+        	
+            } else {
+            	System.out.println("Não foi possível reservar, pois o livro já está emprestado!");
+            }
+        } else {
             System.out.println("Não foi possível reservar, pois o limite de reservas foi atingido!");
         }
 
@@ -174,7 +181,7 @@ public abstract class Usuario {
 			ativos.forEach(a -> System.out.println(a));
 		}
 		if(!passados.isEmpty()) {
-			System.out.println("Emprestimos Passados");
+			System.out.println("Históricos de Emprestimos");
 			passados.forEach(p -> System.out.println(p));
 		}
 		if(!reservas.isEmpty()) {

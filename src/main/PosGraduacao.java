@@ -8,7 +8,7 @@ public class PosGraduacao extends Usuario {
 	public PosGraduacao(String nome, int codigo) {
 		super(nome, codigo);
 		this.ce = new EmprestimoAluno();
-		this.emprestimos = new ArrayList<Emprestimo>(limiteEmprestimos);
+		this.emprestimos = new ArrayList<Emprestimo>();
 	}
 	
 	public int getTempoDeEmprestimo() {

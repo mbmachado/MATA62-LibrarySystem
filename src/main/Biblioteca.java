@@ -70,6 +70,10 @@ public class Biblioteca {
         ((Professor) u).qtdNotificacoes(); 
  
     }
+    
+    public void addUsuario(Usuario u) {usuarios.add(u);}
+
+    public void addLivros(Livro l) {livros.add(l);}
 
     public void sair(){
         System.exit(0);

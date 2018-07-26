@@ -8,7 +8,7 @@ public class Graduacao extends Usuario {
 	public Graduacao(String nome, int codigo) {
 		super(nome, codigo);
 		this.ce = new EmprestimoAluno();
-		this.emprestimos = new ArrayList<Emprestimo>(limiteEmprestimos);
+		this.emprestimos = new ArrayList<Emprestimo>();
 	}
 
 	public int getTempoDeEmprestimo() {

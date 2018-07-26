@@ -46,7 +46,7 @@ public class Reserva {
 	}
 
 	public String toString(){
-	    return "TÃ­tulo: " + this.livro.getTitulo() +  ", Data da solicitaÃ§Ã£o: "
+	    return "Título: " + this.livro.getTitulo() +  ", Data da solicitação: "
                 + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 }

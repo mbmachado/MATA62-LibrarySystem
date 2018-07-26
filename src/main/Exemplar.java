@@ -46,7 +46,7 @@ public class Exemplar {
 	}
 
     public String toString() {
-	    return "CÃ³digo do livro: " + this.livro.getCodigo() + ", CÃ³digo do Exemplar: " + this.ID + ", Status: "
+	    return "Código do livro: " + this.livro.getCodigo() + ", Código do Exemplar: " + this.ID + ", Status: "
                 + this.status;
     }
 }

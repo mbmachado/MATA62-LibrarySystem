@@ -20,7 +20,9 @@ public class Emprestimo {
 	
 	public boolean jaRealizado(Exemplar exemplar) {
 		if((this.exemplar.getLivro()).equals(exemplar.getLivro())) {
-			return true;
+			//if(exemplar.getStatus().equals("emprestado")) {
+				return true;
+			//}
 		}
 		return false;
 	}
@@ -71,12 +73,12 @@ public class Emprestimo {
 	    String dataDevolucao;
 
 	    if(dataDevolucaoReal == null) {
-            dataDevolucao = "Data devoluÃ§Ã£o prevista: " + dataDevolucaoPrevista.format(dateFormat);
+            dataDevolucao = "Data devolução prevista: " + dataDevolucaoPrevista.format(dateFormat);
         } else {
-	        dataDevolucao = "Data de devoluÃ§Ã£o: " + dataDevolucaoReal.format(dateFormat);
+	        dataDevolucao = "Data de devolução: " + dataDevolucaoReal.format(dateFormat);
         }
 
-        String titulo = "TÃ­tulo: " + exemplar.getLivro().getTitulo();
+        String titulo = "Título: " + exemplar.getLivro().getTitulo();
 	    String dataEmprestimo = ", Data do emprestimo: " + this.dataEmprestimo.format(dateFormat);
         String status = ", Status: " + exemplar.getStatus();
 

@@ -9,11 +9,11 @@ public class Livro implements Subject {
 	private String titulo;
 	private String autor;
 	private int codigo;
-	private LocalDate anoPublicacao;
+	private String anoPublicacao;
 	private String editora;
 	private String edicao;
 	
-	public Livro(String titulo, String autor, int codigo, LocalDate anoPublicacao, String editora, String edicao) {
+	public Livro(String titulo, String autor, int codigo, String anoPublicacao, String editora, String edicao) {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.codigo = codigo;
@@ -23,6 +23,7 @@ public class Livro implements Subject {
 		this.reservas = new ArrayList<Reserva>();
 		this.observers = new ArrayList<Observer>();
 		this.exemplares = new ArrayList<Exemplar>();
+		Biblioteca.getInstancia().addLivros(this);
 	}
 	
 	public Exemplar obterExemplarParaEmprestimo(int index) {
@@ -95,7 +96,7 @@ public class Livro implements Subject {
 	    System.out.println("Título: " + this.titulo);
         System.out.println("Quantidade de reservas: " + this.reservas.size());
 	    if(this.getReservas().size() > 0) {
-	        System.out.println("UsuÃ¡rios que reservaram: ");
+	        System.out.println("Usuários que reservaram: ");
             reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
         }
 
@@ -108,7 +109,7 @@ public class Livro implements Subject {
 	@Override
 	public void registerObserver(Observer o) {
 		observers.add(o);
-
+		System.out.println("Observador adicionado");
 	}
 
 	@Override
@@ -151,11 +152,11 @@ public class Livro implements Subject {
 		this.codigo = codigo;
 	}
 
-	public LocalDate getAnoPublicacao() {
+	public String getAnoPublicacao() {
 		return anoPublicacao;
 	}
 
-	public void setAnoPublicacao(LocalDate anoPublicacao) {
+	public void setAnoPublicacao(String anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
 
