@@ -27,12 +27,12 @@ public class Sistema {
 
     public static void  getCommand(String entrada) {
 
-        String[] s = entrada.split(";", 1);
+        String[] s = entrada.split("\\s+");
+
+
         System.out.println(Arrays.toString(s));
-//        String command = s[0];
-//        String parametros = s[1];
-//
-//        comandos.get(command).execute(parametros);
+
+        //comandos.get(command).execute(parametros);
     }
 
 
@@ -42,8 +42,10 @@ public class Sistema {
         Usuario u1 = new Graduacao("Otávio", 123);
         Livro l1 = new Livro("Engenharia de Softwore", "Fulano", 14,"26/07/2018", "UFBA", "1 ed.");
 
-        String s = sc.nextLine();
-        System.out.println(s);
+        while (true) {
+            String s = sc.nextLine();
+            getCommand(s);
+        }
 
 	}
 

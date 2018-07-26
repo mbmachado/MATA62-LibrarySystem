@@ -1,5 +1,6 @@
 package src;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Livro implements Subject {
@@ -12,17 +13,19 @@ public class Livro implements Subject {
 	private LocalDate anoPublicacao;
 	private String editora;
 	private String edicao;
-	
-	public Livro(String titulo, String autor, int codigo, LocalDate anoPublicacao, String editora, String edicao) {
+	private static final DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	public Livro(String titulo, String autor, int codigo, String anoPublicacao, String editora, String edicao) {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.codigo = codigo;
-		this.anoPublicacao = anoPublicacao;
+		this.anoPublicacao = LocalDate.parse(anoPublicacao, formatador);
 		this.editora = editora;
 		this.edicao = edicao;
 		this.reservas = new ArrayList<Reserva>();
 		this.observers = new ArrayList<Observer>();
 		this.exemplares = new ArrayList<Exemplar>();
+		Biblioteca.getInstancia().addLivros(this);
 	}
 	
 	public Exemplar obterExemplarParaEmprestimo(int index) {
@@ -194,8 +197,7 @@ public class Livro implements Subject {
             reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
         }
 
-        //TODO exibir exemplares aqui
-        System.out.println("Exemplares");
+        System.out.println("Exemplares:");
         exemplares.forEach(e -> System.out.println(e));
     }
 }
