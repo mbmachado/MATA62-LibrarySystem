@@ -1,3 +1,4 @@
+package src;
 
 public class Graduacao extends Usuario {
 	private final int tempoDeEmprestimo = 3;

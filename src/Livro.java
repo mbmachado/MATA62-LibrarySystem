@@ -1,5 +1,6 @@
+package src;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Livro implements Subject {
 	private ArrayList<Reserva> reservas;
@@ -8,11 +9,11 @@ public class Livro implements Subject {
 	private String titulo;
 	private String autor;
 	private int codigo;
-	private Date anoPublicacao;
+	private LocalDate anoPublicacao;
 	private String editora;
 	private String edicao;
 	
-	public Livro(String titulo, String autor, int codigo, Date anoPublicacao, String editora, String edicao) {
+	public Livro(String titulo, String autor, int codigo, LocalDate anoPublicacao, String editora, String edicao) {
 		this.titulo = titulo;
 		this.autor = autor;
 		this.codigo = codigo;
@@ -91,7 +92,7 @@ public class Livro implements Subject {
 	}
 	
 	public void informacoes() {
-		System.out.println("T�tulo: "+titulo);
+		System.out.println("T�tulo: "+titulo);
 		System.out.println("Quantidade de reservas: "+reservas.size());
 		if(!reservas.isEmpty()) {
 			System.out.println("Reservas");
@@ -149,11 +150,11 @@ public class Livro implements Subject {
 		this.codigo = codigo;
 	}
 
-	public Date getAnoPublicacao() {
+	public LocalDate getAnoPublicacao() {
 		return anoPublicacao;
 	}
 
-	public void setAnoPublicacao(Date anoPublicacao) {
+	public void setAnoPublicacao(LocalDate anoPublicacao) {
 		this.anoPublicacao = anoPublicacao;
 	}
 
@@ -184,4 +185,15 @@ public class Livro implements Subject {
 	public void setObservers(ArrayList<Observer> observers) {
 		this.observers = observers;
 	}
+
+	public void printInfoLivro() {
+	    System.out.println("Título: " + this.titulo);
+        System.out.println("Quantidade de reservas: " + this.reservas.size());
+	    if(this.getReservas().size() > 0) {
+	        System.out.println("Usuários que reservaram: ");
+            reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
+        }
+
+        //TODO exibir exemplares aqui
+    }
 }

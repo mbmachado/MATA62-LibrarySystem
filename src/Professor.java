@@ -1,3 +1,4 @@
+package src;
 
 public class Professor extends Usuario implements Observer {
 	private final int tempoDeEmprestimo = 7;
@@ -30,5 +31,9 @@ public class Professor extends Usuario implements Observer {
 	public void update() {
 		qtdNotificacoes++;
 	}
+
+	public void qtdNotificacoes() {
+
+    }
 
 }

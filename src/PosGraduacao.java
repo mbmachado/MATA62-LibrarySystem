@@ -1,3 +1,4 @@
+package src;
 
 public class PosGraduacao extends Usuario {
 	private final int tempoDeEmprestimo = 4;

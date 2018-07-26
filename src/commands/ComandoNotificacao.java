@@ -1,7 +1,10 @@
 package commands;
 
+import src.Biblioteca;
+
 public class ComandoNotificacao implements Command {
-    public  void execute(){
-//        TODO fazer o método execute
+    public  boolean execute(String parametros){
+        int codigoUsuario = Integer.parseInt(parametros);
+        return Biblioteca.getInstancia().notificacao(codigoUsuario);
     }
 }

@@ -1,5 +1,8 @@
+package src;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Date;
 
 public abstract class Usuario {
 	protected ArrayList<Reserva> reservas;
@@ -7,16 +10,17 @@ public abstract class Usuario {
 	protected String nome;
 	protected int codigo;
 	protected ComportamentoEmprestar ce;
-	protected final int MAX_RESERVAS = 3; 
-	
+	protected final int MAX_RESERVAS = 3;
+
 	public Usuario(String nome, int codigo) {
 		this.nome = nome;
 		this.codigo = codigo;
-		this.emprestimos = new ArrayList<Emprestimo>();
-		this.reservas = new ArrayList<Reserva>();
+		this.reservas = new ArrayList<Reserva>(MAX_RESERVAS);
 	}
 	
+
 	public void fazerEmprestimo(Livro livro) {
+	    // TODO adicionar parametros
 		ce.fazerEmprestimo(livro, this);
 	}
 	
@@ -40,6 +44,8 @@ public abstract class Usuario {
 				emprestado = true;
 				break;
 			}
+		if(emprestimos.get(i).getDataDevolucaoReal() == null) {
+			emprestimos.get(i).setDataDevolucaoPrevista(LocalDate.now());
 		}
 		return emprestado;
 	}
@@ -108,9 +114,9 @@ public abstract class Usuario {
 			livro.adicionarReserva(reserva);
 			System.out.println("Reserva criada com sucesso!");
 		} else {
-			System.out.println("Não foi possível reservar, pois o limite de reservas foi atingido!");
+			System.out.println("Nï¿½o foi possï¿½vel reservar, pois o limite de reservas foi atingido!");
 		}
-	}
+
 	
 	public void removerReserva(Reserva reserva) {
 		int i = reservas.indexOf(reserva);
@@ -139,12 +145,20 @@ public abstract class Usuario {
 					devolvido = true;
 					break;
 				}
+	public ArrayList<Emprestimo> obterEmprestimosEmAtraso() {
+		ArrayList<Emprestimo> emprestimosEmAtraso = new ArrayList();
+		// TODO mudar esse mÃ©todo para suportar a classe LocalDate
+		Date today = new Date();
+		for (int i = 0; i < emprestimos.size(); i++) {
+			Emprestimo emprestimoAtrasado = emprestimos.get(i);
+			if(emprestimoAtrasado.getDataDevolucaoPrevista().before(today)) {
+				emprestimosEmAtraso.add(emprestimoAtrasado);
 			}
 		}
 		if(devolvido) {
 			System.out.println("Exemplar do livro devolvido!");
 		} else {
-			System.out.println("Não foi possível devolver, pois nunhum exemplar do livro foi emprestado!");
+			System.out.println("Nï¿½o foi possï¿½vel devolver, pois nunhum exemplar do livro foi emprestado!");
 		}
 	}
 	
@@ -152,7 +166,7 @@ public abstract class Usuario {
 		ArrayList<Emprestimo> ativos = obterEmprestimosAtivos();
 		ArrayList<Emprestimo> passados = obterEmprestimosPassados();
 		
-		System.out.println("Usuário: "+nome);
+		System.out.println("Usuï¿½rio: "+nome);
 		if(!ativos.isEmpty()) {
 			System.out.println("Emprestimos Ativos");
 			System.out.println(ativos);
@@ -194,7 +208,17 @@ public abstract class Usuario {
 	public ArrayList<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
-	
+
 	public abstract int getTempoDeEmprestimo();
 	public abstract int getLimiteEmprestimos();
+
+
+	public void printInfoUsuario() {
+	    System.out.println("Emprestimos:");
+        emprestimos.forEach(e -> System.out.println(e));
+        System.out.println("Reservas: ");
+	    reservas.forEach(r -> System.out.println(r));
+
+
+    }
 }

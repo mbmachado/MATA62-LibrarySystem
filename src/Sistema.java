@@ -1,6 +1,8 @@
+package src;
+
 import java.util.HashMap;
 import java.util.Scanner;
-import commands.*;
+import src.commands.*;
 
 public class Sistema {
 
@@ -19,17 +21,29 @@ public class Sistema {
     }
 
 
-    public static void  getCommand(String command) {
-         comandos.get(command).execute();
+    public static boolean  getCommand(String entrada) {
+
+        String[] s = entrada.split(" ", 1);
+        String command = s[0];
+        String parametros = s[1];
+
+        return comandos.get(command).execute(parametros);
     }
 
 
 	public static void main(String[] args) {
         Sistema sis = new Sistema();
         Scanner sc = new Scanner(System.in);
-        String c = sc.next();
-        
-        getCommand(c);
+
+
+        // TODO fazer while enquando o comando não for sair
+
+        while (true) {
+            String c = sc.next();
+            if(getCommand(c) == false)
+                break;
+
+        }
 
 	}
 

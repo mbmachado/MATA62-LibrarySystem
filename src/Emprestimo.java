@@ -1,4 +1,7 @@
+package src;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Emprestimo {
 	private Exemplar exemplar;
@@ -21,7 +24,7 @@ public class Emprestimo {
 		}
 		return false;
 	}
-	
+
 	public Exemplar getExemplar() {
 		return exemplar;
 	}
@@ -46,8 +49,10 @@ public class Emprestimo {
 		this.dataEmprestimo = dataEmprestimo;
 	}
 	
-	public LocalDate getDataDevolucaoPrevista() {
-		return dataDevolucaoPrevista;
+	public Date getDataDevolucaoPrevista() {
+	    return new Date();
+        // TODO remover comentário depois de adaptar o método na classe Usuário
+	    //return dataDevolucaoPrevista;
 	}
 	
 	public void setDataDevolucaoPrevista(LocalDate dataDevolucaoPrevista) {
@@ -61,4 +66,18 @@ public class Emprestimo {
 	public void setDataDevolucaoReal(LocalDate dataDevolucaoReal) {
 		this.dataDevolucaoReal = dataDevolucaoReal;
 	}
+
+	public String toString() {
+
+	    String data;
+
+	    if(dataDevolucaoReal == null) {
+            data = "Data devolução prevista: " + dataDevolucaoPrevista.format(DateTimeFormatter.ofPattern(dateFormart));
+        } else {
+	        data = "Data de devolução: " + dataDevolucaoReal.format(DateTimeFormatter.ofPattern(dateFormart));
+        }
+	    return "Título: " + exemplar.getLivro().getTitulo() + ", Data do emprestimo: " +
+                dataEmprestimo.format(DateTimeFormatter.ofPattern(dateFormart)) + ", Status: " + exemplar.getStatus() +
+                data;
+    }
 }

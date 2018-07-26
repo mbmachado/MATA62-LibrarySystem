@@ -1,3 +1,4 @@
+package src;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
@@ -8,32 +9,32 @@ public class EmprestimoAluno implements ComportamentoEmprestar {
 		Exemplar exemplar;
 		ArrayList<Reserva> reservas = livro.getReservas();
 		int indiceExemplarDisponivel = livro.getIndiceExemplarDisponivel(), indiceReserva = livro.temReserva(usuario);
-		
-	
+
+
 		if(usuario.numeroEmprestimosEmAtraso() > 0) {
-			System.out.println("Não foi possível efetuar emprestimo. Usuário está em débito!");
+			System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Usuï¿½rio estï¿½ em dï¿½bito!");
 		} else if(usuario.numeroEmprestimosAtivos() == usuario.getLimiteEmprestimos()) {
-			System.out.println("Não foi possível efetuar emprestimo. Usuário estourou limite de emprestimos!");
+			System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Usuï¿½rio estourou limite de emprestimos!");
 		} else {
-			if(indiceExemplarDisponivel != -1) { // Há exemplar disponível?
+			if(indiceExemplarDisponivel != -1) { // Hï¿½ exemplar disponï¿½vel?
 				if(indiceReserva != -1) { // Tem reserva?
 					livro.removerReserva(indiceReserva);
 					exemplar = livro.obterExemplarParaEmprestimo(indiceExemplarDisponivel);
 					if(usuario.jaPossuiEmprestimo(exemplar)) {
 						exemplar.setStatus("disponivel");
-						System.out.println("Não foi possível efetuar emprestimo. Um Exemplar do livro já se encontra em emprestimo!");
+						System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Um Exemplar do livro jï¿½ se encontra em emprestimo!");
 					} else {
 						Emprestimo emprestimo = new Emprestimo(exemplar, usuario, LocalDate.now(), LocalDate.now().plusDays(usuario.getTempoDeEmprestimo()), null);
 						exemplar.adicionarEmprestimo(emprestimo);
 						usuario.adicionarEmprestimo(emprestimo);
 						System.out.println("Exemplar de livro emprestado com sucesso!");
 					}
-					
-				} else if(reservas.size() < livro.numeroDeExemplaresDisponiveis()) { //Há livros sem reserva?
+
+				} else if(reservas.size() < livro.numeroDeExemplaresDisponiveis()) { //Hï¿½ livros sem reserva?
 					exemplar = livro.obterExemplarParaEmprestimo(indiceExemplarDisponivel);
 					if(usuario.jaPossuiEmprestimo(exemplar)) {
 						exemplar.setStatus("disponivel");
-						System.out.println("Não foi possível efetuar emprestimo. Um Exemplar do livro já se encontra em emprestimo!");
+						System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Um Exemplar do livro jï¿½ se encontra em emprestimo!");
 					} else {
 						Emprestimo emprestimo = new Emprestimo(exemplar, usuario, LocalDate.now(), LocalDate.now().plusDays(usuario.getTempoDeEmprestimo()), null);
 						exemplar.adicionarEmprestimo(emprestimo);
@@ -41,14 +42,14 @@ public class EmprestimoAluno implements ComportamentoEmprestar {
 						System.out.println("Exemplar de livro emprestado com sucesso!");
 					}
 				} else {
-					System.out.println("Não foi possível efetuar emprestimo. Todos os exemplares têm reserva!");
+					System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Todos os exemplares tï¿½m reserva!");
 				}
 			} else {
-				System.out.println("Não foi possível efetuar emprestimo. Não há exemplares disponíveis");
+				System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Nï¿½o hï¿½ exemplares disponï¿½veis");
 			}
-		
-		} 
-		
+
+		}
+
 	}
-	
+
 }

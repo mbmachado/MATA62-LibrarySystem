@@ -1,9 +1,14 @@
+package src;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
+import src.Exemplar;
 
 public class Biblioteca {
+
     private static Biblioteca instancia;
-    private ArrayList usuarios = new ArrayList<Usuario>();
-    // TODO fazer o array list de livros;
+    private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    private ArrayList<Livro> livros = new ArrayList<Livro>();
 
     private Biblioteca(){}
 
@@ -16,23 +21,92 @@ public class Biblioteca {
         return instancia;
     }
 
-    public void reservar() {}
+    public boolean reservar(int codigoUsuario, int codigoLivro) {
+        Livro l = this.obterLivro(codigoLivro);
+        Usuario u = this.obterUsuario(codigoUsuario);
 
-    public void devolver() {}
+        try {
+            LocalDate now = LocalDate.now();
+            u.adicionarReserva(u.fazerReserva(l, now));
+            System.out.println("Reserva realizada com sucesso.");
 
-    public void observar() {}
+        }catch (OutOfMemoryError e){
+            System.out.println("Limite de reservas excedido.");
+        }
 
-    public void emprestar() {}
+        return true;
+    }
 
-    public void infoLivro() {}
+    public boolean devolver(int codigoUsuario, int codigoLivro) {
 
-    public void notificacao(){}
+        Usuario u = obterUsuario(codigoUsuario);
+        Livro l = obterLivro(codigoLivro);
 
-    public void sair(){}
+        // TODO realizar a devolução e exibir mensagem
+        //u.fazerDevolucao();
 
-    // TODO criar a classe Livro para implementar esse método
-    //public Livro obterLivro() {}
+        return true;
+
+    }
+
+    public boolean observar(int codigoUsuario, int codigoLivro) {
+        Usuario u = obterUsuario(codigoUsuario);
+        Livro l = obterLivro(codigoLivro);
+
+        //TODO chamar o método responsável
 
 
-    public Usuario obterUsuario(String nome){return null;}
+        return true;
+    }
+
+    public boolean emprestar(int codigoUsuario, int codigoLivro) {
+
+        Livro l = this.obterLivro(codigoLivro);
+        Usuario u = this.obterUsuario(codigoUsuario);
+//        ArrayList<Exemplar> exemplares = l.getExemplares();
+//
+//        Exemplar exemplarDisponivel = exemplares.stream()
+//                .filter(e -> e.getStatus().equals("Disponível"))
+//                .findAny()
+//                .orElse(null);
+
+        // TODO exibir mensagem de emprestimo
+        u.fazerEmprestimo(l);
+        return true;
+
+    }
+
+    public boolean infoLivro(int codigoLivro) {
+        Livro l = obterLivro(codigoLivro);
+        l.printInfoLivro();
+        return true;
+    }
+
+    public boolean infoUsuario(int codigoUsuario) {
+        Usuario u = obterUsuario(codigoUsuario);
+        u.printInfoUsuario();
+        return true;
+    }
+
+    public boolean notificacao(int codigoUsuario){
+        Usuario u = obterUsuario(codigoUsuario);
+
+        //TODO chamar método qtdNoficiacoes do Professor
+
+        return true;
+    }
+
+    public boolean sair(){
+        return false;
+    }
+
+    private  Livro obterLivro(int codigoLivro) {
+        Optional<Livro> livro =  livros.stream().filter(l -> l.getCodigo() == codigoLivro).findFirst();
+        return livro.orElse(null);
+    }
+
+    private Usuario obterUsuario(int codigoUsuario){
+        Optional<Usuario> usuario = usuarios.stream().filter(u -> u.getCodigo() == codigoUsuario).findFirst();
+        return usuario.orElse(null);
+    }
 }

@@ -1,7 +1,10 @@
 package commands;
 
+import src.Biblioteca;
+
 public class ComandoInfoUsuario implements Command {
-    public  void execute(){
-//        TODO fazer o método execute
+    public  boolean execute(String parametro){
+        int codigoUsuario = Integer.parseInt(parametro);
+        return Biblioteca.getInstancia().infoUsuario(codigoUsuario);
     }
 }
