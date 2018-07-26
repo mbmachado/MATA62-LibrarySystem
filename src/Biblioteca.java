@@ -1,4 +1,5 @@
 package src;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -23,7 +24,13 @@ public class Biblioteca {
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
 
+        try {
+            LocalDate now = LocalDate.now();
+            u.fazerReserva(l, now);
 
+        }catch (OutOfMemoryError e){
+            System.out.println("Limite de reservas excedido.");
+        }
     }
 
     public void devolver() {}

@@ -2,6 +2,7 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class Usuario {
 	protected ArrayList<Reserva> reservas;
@@ -27,7 +28,7 @@ public abstract class Usuario {
 		}
 	}
 	
-	public Reserva fazerReserva(Livro livro, Date data) {
+	public Reserva fazerReserva(Livro livro, LocalDate data) {
 		return new Reserva(data, this, livro);
 	}
 	

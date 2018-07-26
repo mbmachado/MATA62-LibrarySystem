@@ -1,23 +1,23 @@
 package src;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 public class Reserva {
-	private Date data;
+	private LocalDate data;
 	private Usuario usuario;
 	private Livro livro;
 	
-	public Reserva(Date data, Usuario usuario, Livro livro) {
+	public Reserva(LocalDate data, Usuario usuario, Livro livro) {
 		this.data = data;
 		this.usuario = usuario;
 		this.livro = livro;
 	}
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
