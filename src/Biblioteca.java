@@ -25,7 +25,7 @@ public class Biblioteca {
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
 
-        u.fazerReserva()
+        u.fazerReserva(l);
 
         return true;
     }

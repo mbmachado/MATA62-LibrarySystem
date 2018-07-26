@@ -49,10 +49,9 @@ public class Emprestimo {
 		this.dataEmprestimo = dataEmprestimo;
 	}
 	
-	public Date getDataDevolucaoPrevista() {
-	    return new Date();
+	public LocalDate getDataDevolucaoPrevista() {
         // TODO remover comentário depois de adaptar o método na classe Usuário
-	    //return dataDevolucaoPrevista;
+	    return dataDevolucaoPrevista;
 	}
 	
 	public void setDataDevolucaoPrevista(LocalDate dataDevolucaoPrevista) {
