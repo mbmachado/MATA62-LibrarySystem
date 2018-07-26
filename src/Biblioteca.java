@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Biblioteca {
     private static Biblioteca instancia;
-    private ArrayList usuarios = new ArrayList<Usuario>();
+    private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
     // TODO fazer o array list de livros;
 
     private Biblioteca(){}
@@ -32,7 +32,7 @@ public class Biblioteca {
     public void sair(){}
 
     // TODO criar a classe Livro para implementar esse método
-    //public Livro obterLivro() {}
+    public Livro obterLivro() {return null;}
 
 
     public Usuario obterUsuario(String nome){return null;}

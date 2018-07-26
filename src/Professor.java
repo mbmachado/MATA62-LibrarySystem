@@ -1,3 +1,4 @@
+package src;
 
 public class Professor extends Usuario implements Observer {
 	private final int tempoDeEmprestimo = 7;

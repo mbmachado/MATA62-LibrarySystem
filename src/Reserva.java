@@ -1,4 +1,6 @@
+package src;
 import java.util.Date;
+
 
 public class Reserva {
 	private Date data;
