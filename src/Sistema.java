@@ -21,13 +21,13 @@ public class Sistema {
     }
 
 
-    public static boolean  getCommand(String entrada) {
+    public static void  getCommand(String entrada) {
 
         String[] s = entrada.split(" ", 1);
         String command = s[0];
         String parametros = s[1];
 
-        return comandos.get(command).execute(parametros);
+        comandos.get(command).execute(parametros);
     }
 
 
@@ -36,12 +36,10 @@ public class Sistema {
         Scanner sc = new Scanner(System.in);
 
 
-        // TODO fazer while enquando o comando não for sair
 
         while (true) {
             String c = sc.next();
-            if(getCommand(c) == false)
-                break;
+            getCommand(c);
 
         }
 

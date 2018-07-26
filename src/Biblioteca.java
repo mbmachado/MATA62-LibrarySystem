@@ -21,16 +21,15 @@ public class Biblioteca {
         return instancia;
     }
 
-    public boolean reservar(int codigoUsuario, int codigoLivro) {
+    public void reservar(int codigoUsuario, int codigoLivro) {
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
 
         u.fazerReserva(l);
 
-        return true;
     }
 
-    public boolean devolver(int codigoUsuario, int codigoLivro) {
+    public void devolver(int codigoUsuario, int codigoLivro) {
 
         Usuario u = obterUsuario(codigoUsuario);
         Livro l = obterLivro(codigoLivro);
@@ -38,59 +37,45 @@ public class Biblioteca {
         // TODO realizar a devolução e exibir mensagem
         //u.fazerDevolucao();
 
-        return true;
-
     }
 
-    public boolean observar(int codigoUsuario, int codigoLivro) {
+    public void observar(int codigoUsuario, int codigoLivro) {
         Usuario u = obterUsuario(codigoUsuario);
         Livro l = obterLivro(codigoLivro);
 
         //TODO chamar o método responsável
 
 
-        return true;
     }
 
-    public boolean emprestar(int codigoUsuario, int codigoLivro) {
+    public void emprestar(int codigoUsuario, int codigoLivro) {
 
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
-//        ArrayList<Exemplar> exemplares = l.getExemplares();
-//
-//        Exemplar exemplarDisponivel = exemplares.stream()
-//                .filter(e -> e.getStatus().equals("Disponível"))
-//                .findAny()
-//                .orElse(null);
 
-        // TODO exibir mensagem de emprestimo
         u.fazerEmprestimo(l);
-        return true;
 
     }
 
-    public boolean infoLivro(int codigoLivro) {
+    public void infoLivro(int codigoLivro) {
         Livro l = obterLivro(codigoLivro);
         l.printInfoLivro();
-        return true;
     }
 
-    public boolean infoUsuario(int codigoUsuario) {
+    public void infoUsuario(int codigoUsuario) {
         Usuario u = obterUsuario(codigoUsuario);
         u.printInfoUsuario();
-        return true;
     }
 
-    public boolean notificacao(int codigoUsuario){
+    public void notificacao(int codigoUsuario){
         Usuario u = obterUsuario(codigoUsuario);
 
         //TODO chamar método qtdNoficiacoes do Professor
 
-        return true;
     }
 
-    public boolean sair(){
-        return false;
+    public void sair(){
+        System.exit(0);
     }
 
     private  Livro obterLivro(int codigoLivro) {
