@@ -1,10 +1,12 @@
 package src;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Biblioteca {
+
     private static Biblioteca instancia;
     private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    // TODO fazer o array list de livros;
+    private ArrayList<Livro> livros = new ArrayList<Livro>();
 
     private Biblioteca(){}
 
@@ -23,7 +25,15 @@ public class Biblioteca {
 
     public void observar() {}
 
-    public void emprestar() {}
+    public void emprestar(int codigoUsuario, int codigoLivro) {
+
+        Livro l = this.obterLivro(codigoLivro);
+        Usuario u = this.obterUsuario(codigoUsuario);
+
+
+
+
+    }
 
     public void infoLivro() {}
 
@@ -31,9 +41,13 @@ public class Biblioteca {
 
     public void sair(){}
 
-    // TODO criar a classe Livro para implementar esse método
-    public Livro obterLivro() {return null;}
+    private  Livro obterLivro(int codigoLivro) {
+        Optional<Livro> livro =  livros.stream().filter(l -> l.getCodigo() == codigoLivro).findFirst();
+        return livro.orElse(null);
+    }
 
-
-    public Usuario obterUsuario(String nome){return null;}
+    private Usuario obterUsuario(int codigoUsuario){
+        Optional<Usuario> usuario = usuarios.stream().filter(u -> u.getCodigo() == codigoUsuario).findFirst();
+        return usuario.orElse(null);
+    }
 }
