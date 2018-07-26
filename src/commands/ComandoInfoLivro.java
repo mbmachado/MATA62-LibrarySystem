@@ -1,7 +1,13 @@
 package src.commands;
 
+import src.Biblioteca;
+
 public class ComandoInfoLivro implements Command {
-    public  void execute(String parametros){
-//        TODO fazer o método execute
+    public  boolean execute(String parametro){
+        // TODO fazer o método execute
+
+        int codigoLivro = Integer.parseInt(parametro);
+        return Biblioteca.getInstancia().infoLivro(codigoLivro);
+
     }
 }

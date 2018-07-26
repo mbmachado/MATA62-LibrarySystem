@@ -21,24 +21,45 @@ public class Biblioteca {
         return instancia;
     }
 
-    public void reservar(int codigoUsuario, int codigoLivro) {
+    public boolean reservar(int codigoUsuario, int codigoLivro) {
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
 
         try {
             LocalDate now = LocalDate.now();
             u.adicionarReserva(u.fazerReserva(l, now));
+            System.out.println("Reserva realizada com sucesso.");
 
         }catch (OutOfMemoryError e){
             System.out.println("Limite de reservas excedido.");
         }
+
+        return true;
     }
 
-    public void devolver() {}
+    public boolean devolver(int codigoUsuario, int codigoLivro) {
 
-    public void observar() {}
+        Usuario u = obterUsuario(codigoUsuario);
+        Livro l = obterLivro(codigoLivro);
 
-    public void emprestar(int codigoUsuario, int codigoLivro) {
+        // TODO realizar a devolução e exibir mensagem
+        //u.fazerDevolucao();
+
+        return true;
+
+    }
+
+    public boolean observar(int codigoUsuario, int codigoLivro) {
+        Usuario u = obterUsuario(codigoUsuario);
+        Livro l = obterLivro(codigoLivro);
+
+        //TODO chamar o método responsável
+
+
+        return true;
+    }
+
+    public boolean emprestar(int codigoUsuario, int codigoLivro) {
 
         Livro l = this.obterLivro(codigoLivro);
         Usuario u = this.obterUsuario(codigoUsuario);
@@ -49,13 +70,31 @@ public class Biblioteca {
 //                .findAny()
 //                .orElse(null);
 
+        // TODO exibir mensagem de emprestimo
         u.fazerEmprestimo(l);
+        return true;
 
     }
 
-    public void infoLivro() {}
+    public boolean infoLivro(int codigoLivro) {
+        Livro l = obterLivro(codigoLivro);
+        l.printInfoLivro();
+        return true;
+    }
 
-    public void notificacao(){}
+    public boolean infoUsuario(int codigoUsuario) {
+        Usuario u = obterUsuario(codigoUsuario);
+        u.printInfoUsuario();
+        return true;
+    }
+
+    public boolean notificacao(int codigoUsuario){
+        Usuario u = obterUsuario(codigoUsuario);
+
+        //TODO chamar método qtdNoficiacoes do Professor
+
+        return true;
+    }
 
     public boolean sair(){
         return false;

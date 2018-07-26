@@ -15,4 +15,8 @@ public class Professor extends Usuario implements Observer {
 
 	}
 
+	public void qtdNotificacoes() {
+
+    }
+
 }

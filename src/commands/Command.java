@@ -1,5 +1,5 @@
 package src.commands;
 
 public interface Command {
-    public void execute(String parametros);
+    public boolean execute(String parametros);
 }

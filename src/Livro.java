@@ -126,4 +126,14 @@ public class Livro implements Subject {
 		this.observers = observers;
 	}
 
+	public void printInfoLivro() {
+	    System.out.println("Título: " + this.titulo);
+        System.out.println("Quantidade de reservas: " + this.reservas.size());
+	    if(this.getReservas().size() > 0) {
+	        System.out.println("Usuários que reservaram: ");
+            reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
+        }
+
+        //TODO exibir exemplares aqui
+    }
 }

@@ -84,4 +84,13 @@ public abstract class Usuario {
 	public ArrayList<Emprestimo> getEmprestimos() {
 		return emprestimos;
 	}
+
+	public void printInfoUsuario() {
+	    System.out.println("Emprestimos:");
+        emprestimos.forEach(e -> System.out.println(e));
+        System.out.println("Reservas: ");
+	    reservas.forEach(r -> System.out.println(r));
+
+
+    }
 }

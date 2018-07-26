@@ -1,5 +1,6 @@
 package src;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class Reserva {
@@ -36,4 +37,9 @@ public class Reserva {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
+
+	public String toString(){
+	    return "Título: " + this.livro.getTitulo() +  ", Data da solicitação: "
+                + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 }

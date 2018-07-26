@@ -1,5 +1,6 @@
 package src;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Emprestimo {
@@ -8,6 +9,7 @@ public class Emprestimo {
 	private LocalDate dataEmprestimo;
 	private LocalDate dataDevolucaoPrevista;
 	private LocalDate dataDevolucaoReal;
+	private final static String dateFormart = "dd/MM/yyyy";
 	
 	public Emprestimo(Exemplar exemplar, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucaoPrevista, LocalDate dataDevolucaoReal) {
 		this.exemplar = exemplar;
@@ -58,4 +60,18 @@ public class Emprestimo {
 	public void setDataDevolucaoReal(LocalDate dataDevolucaoReal) {
 		this.dataDevolucaoReal = dataDevolucaoReal;
 	}
+
+	public String toString() {
+
+	    String data;
+
+	    if(dataDevolucaoReal == null) {
+            data = "Data devolução prevista: " + dataDevolucaoPrevista.format(DateTimeFormatter.ofPattern(dateFormart));
+        } else {
+	        data = "Data de devolução: " + dataDevolucaoReal.format(DateTimeFormatter.ofPattern(dateFormart));
+        }
+	    return "Título: " + exemplar.getLivro().getTitulo() + ", Data do emprestimo: " +
+                dataEmprestimo.format(DateTimeFormatter.ofPattern(dateFormart)) + ", Status: " + exemplar.getStatus() +
+                data;
+    }
 }

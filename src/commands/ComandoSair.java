@@ -1,7 +1,9 @@
 package src.commands;
 
-public class ComandoSair implements Command {
-    public  void execute(String parametros){
+import src.Biblioteca;
 
+public class ComandoSair implements Command {
+    public  boolean execute(String parametros){
+        return Biblioteca.getInstancia().sair();
     }
 }
