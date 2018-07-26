@@ -27,10 +27,10 @@ public class Sistema {
 
     public static void  getCommand(String entrada) {
 
-        String[] s = entrada.split("\\s+");
+        String[] s = entrada.split("\\s+", 1);
 
 
-        System.out.println(Arrays.toString(s));
+        System.out.println(s[0]);
 
         //comandos.get(command).execute(parametros);
     }
