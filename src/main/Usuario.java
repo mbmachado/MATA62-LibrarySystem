@@ -1,8 +1,6 @@
-package src;
-
+package main;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.Date;
 
 public abstract class Usuario {
 	protected ArrayList<Reserva> reservas;
@@ -20,7 +18,6 @@ public abstract class Usuario {
 	
 
 	public void fazerEmprestimo(Livro livro) {
-	    // TODO adicionar parametros
 		ce.fazerEmprestimo(livro, this);
 	}
 	
@@ -44,10 +41,12 @@ public abstract class Usuario {
                 emprestado = true;
                 break;
             }
-            // TODO verificar se esse if Ã© dentro do FOR
+            // TODO verificar se esse if Ã© dentro do FOR 
+            /*
             if (emprestimos.get(i).getDataDevolucaoReal() == null) {
-                emprestimos.get(i).setDataDevolucaoPrevista(LocalDate.now());
-            }
+            //    emprestimos.get(i).setDataDevolucaoPrevista(LocalDate.now());
+            } 
+            */
         }
 
         return emprestado;
@@ -120,12 +119,11 @@ public abstract class Usuario {
         }
 
         else {
-            System.out.println("Nï¿½o foi possï¿½vel reservar, pois o limite de reservas foi atingido!");
+            System.out.println("Não foi possível reservar, pois o limite de reservas foi atingido!");
         }
 
     }
 
-	
 	public void removerReserva(Reserva reserva) {
 		int i = reservas.indexOf(reserva);
 		if (i >= 0) {
@@ -133,8 +131,13 @@ public abstract class Usuario {
 		}
 	}
 	
-	public void adicionarReserva(Reserva reserva) {reservas.add(reserva);}
-
+	public void removerReserva(int index) {
+		reservas.remove(index);
+	}
+	
+	public void adicionarReserva(Reserva reserva) {
+		reservas.add(reserva);
+	}
 
 	public void fazerDevolucao(Livro livro) {
 		ArrayList<Exemplar> exemplares = livro.getExemplares();
@@ -157,28 +160,28 @@ public abstract class Usuario {
 		if(devolvido) {
 			System.out.println("Exemplar do livro devolvido!");
 		} else {
-			System.out.println("Nï¿½o foi possï¿½vel devolver, pois nunhum exemplar do livro foi emprestado!");
+			System.out.println("Não foi possível devolver, pois nunhum exemplar do livro foi emprestado!");
 		}
 	}
 	
-	public void informacoes() {
+	public void printInfoUsuario() {
 		ArrayList<Emprestimo> ativos = obterEmprestimosAtivos();
 		ArrayList<Emprestimo> passados = obterEmprestimosPassados();
 		
-		System.out.println("Usuï¿½rio: "+nome);
+		System.out.println("Usuário: "+nome);
 		if(!ativos.isEmpty()) {
 			System.out.println("Emprestimos Ativos");
-			System.out.println(ativos);
+			ativos.forEach(a -> System.out.println(a));
 		}
 		if(!passados.isEmpty()) {
 			System.out.println("Emprestimos Passados");
-			System.out.println(passados);
+			passados.forEach(p -> System.out.println(p));
 		}
 		if(!reservas.isEmpty()) {
 			System.out.println("Reservas");
-			System.out.println(reservas);
+			reservas.forEach(r -> System.out.println(r));
 		}
-	}
+    }
 
 	public String getNome() {
 		return nome;
@@ -211,13 +214,4 @@ public abstract class Usuario {
 	public abstract int getTempoDeEmprestimo();
 	public abstract int getLimiteEmprestimos();
 
-
-	public void printInfoUsuario() {
-	    System.out.println("Emprestimos:");
-        emprestimos.forEach(e -> System.out.println(e));
-        System.out.println("Reservas: ");
-	    reservas.forEach(r -> System.out.println(r));
-
-
-    }
 }

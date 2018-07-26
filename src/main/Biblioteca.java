@@ -1,8 +1,7 @@
-package src;
+package main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
-import src.Exemplar;
 
 public class Biblioteca {
 
@@ -35,8 +34,7 @@ public class Biblioteca {
         Usuario u = obterUsuario(codigoUsuario);
         Livro l = obterLivro(codigoLivro);
 
-        // TODO realizar a devolução e exibir mensagem
-        //u.fazerDevolucao();
+        u.fazerDevolucao(l);
 
         return true;
 
@@ -46,8 +44,7 @@ public class Biblioteca {
         Usuario u = obterUsuario(codigoUsuario);
         Livro l = obterLivro(codigoLivro);
 
-        //TODO chamar o método responsável
-
+        l.registerObserver((Professor) u); 
 
         return true;
     }
@@ -83,9 +80,9 @@ public class Biblioteca {
 
     public boolean notificacao(int codigoUsuario){
         Usuario u = obterUsuario(codigoUsuario);
-
-        //TODO chamar método qtdNoficiacoes do Professor
-
+        
+        ((Professor) u).qtdNotificacoes();
+        
         return true;
     }
 

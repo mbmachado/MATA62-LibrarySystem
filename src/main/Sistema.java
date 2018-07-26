@@ -1,8 +1,7 @@
-package src;
-
+package main;
 import java.util.HashMap;
 import java.util.Scanner;
-import src.commands.*;
+import commands.*;
 
 public class Sistema {
 
@@ -32,11 +31,10 @@ public class Sistema {
 
 
 	public static void main(String[] args) {
-        Sistema sis = new Sistema();
         Scanner sc = new Scanner(System.in);
 
 
-        // TODO fazer while enquando o comando não for sair
+ 
 
         while (true) {
             String c = sc.next();
@@ -44,6 +42,8 @@ public class Sistema {
                 break;
 
         }
+        
+        sc.close();
 
 	}
 

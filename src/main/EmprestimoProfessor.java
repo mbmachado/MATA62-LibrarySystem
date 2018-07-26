@@ -1,6 +1,6 @@
-package src;
-
+package main;
 import java.time.LocalDate;
+
 public class EmprestimoProfessor implements ComportamentoEmprestar {
 
 	@Override
@@ -9,13 +9,13 @@ public class EmprestimoProfessor implements ComportamentoEmprestar {
 		int indiceExemplarDisponivel = livro.getIndiceExemplarDisponivel();
 		
 		if(usuario.numeroEmprestimosEmAtraso() > 0) {
-			System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Usuï¿½rio estï¿½ em dï¿½bito!");
+			System.out.println("Nãoo foi possível efetuar emprestimo. Usuário está em débito!");
 		} else {
 			if(indiceExemplarDisponivel != -1) { // Hï¿½ exemplar disponï¿½vel?
 				exemplar = livro.obterExemplarParaEmprestimo(indiceExemplarDisponivel);
 				if(usuario.jaPossuiEmprestimo(exemplar)) {
 					exemplar.setStatus("disponivel");
-					System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Um Exemplar do livro jï¿½ se encontra em emprestimo!");
+					System.out.println("Nãoo foi possível efetuar emprestimo. Um Exemplar do livro já se encontra em emprestimo!");
 				} else {
 					Emprestimo emprestimo = new Emprestimo(exemplar, usuario, LocalDate.now(), LocalDate.now().plusDays(usuario.getTempoDeEmprestimo()), null);
 					exemplar.adicionarEmprestimo(emprestimo);
@@ -23,7 +23,7 @@ public class EmprestimoProfessor implements ComportamentoEmprestar {
 					System.out.println("Exemplar de livro emprestado com sucesso!");
 				}
 			} else {
-				System.out.println("Nï¿½o foi possï¿½vel efetuar emprestimo. Nï¿½o hï¿½ exemplares disponï¿½veis");
+				System.out.println("Nãoo foi possível efetuar emprestimo. Naõo há exemplares disponíveis");
 			}
 		
 		}

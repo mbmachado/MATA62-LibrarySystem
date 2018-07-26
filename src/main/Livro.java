@@ -1,4 +1,4 @@
-package src;
+package main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -91,18 +91,19 @@ public class Livro implements Subject {
 		}
 	}
 	
-	public void informacoes() {
-		System.out.println("T�tulo: "+titulo);
-		System.out.println("Quantidade de reservas: "+reservas.size());
-		if(!reservas.isEmpty()) {
-			System.out.println("Reservas");
-			System.out.println(reservas);
-		}
-		if(!exemplares.isEmpty()) {
-			System.out.println("Exemplares");
-			System.out.println(exemplares);
-		}
-	}
+	public void printInfoLivro() {
+	    System.out.println("T�tulo: " + this.titulo);
+        System.out.println("Quantidade de reservas: " + this.reservas.size());
+	    if(this.getReservas().size() > 0) {
+	        System.out.println("Usuários que reservaram: ");
+            reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
+        }
+
+	    if(!exemplares.isEmpty()) {
+	        System.out.println("Exemplares");
+	        exemplares.forEach(e -> System.out.println(e));
+	    }
+    }
 	
 	@Override
 	public void registerObserver(Observer o) {
@@ -186,16 +187,5 @@ public class Livro implements Subject {
 		this.observers = observers;
 	}
 
-	public void printInfoLivro() {
-	    System.out.println("Título: " + this.titulo);
-        System.out.println("Quantidade de reservas: " + this.reservas.size());
-	    if(this.getReservas().size() > 0) {
-	        System.out.println("Usuários que reservaram: ");
-            reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
-        }
-
-        //TODO exibir exemplares aqui
-        System.out.println("Exemplares");
-        exemplares.forEach(e -> System.out.println(e));
-    }
+	
 }

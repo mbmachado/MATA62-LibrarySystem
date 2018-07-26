@@ -1,4 +1,4 @@
-package src;
+package main;
 
 public class Professor extends Usuario implements Observer {
 	private final int tempoDeEmprestimo = 7;
@@ -33,7 +33,7 @@ public class Professor extends Usuario implements Observer {
 	}
 
 	public void qtdNotificacoes() {
-
+		System.out.println("Quantidade de Notificações: "+qtdNotificacoes);
     }
 
 }
