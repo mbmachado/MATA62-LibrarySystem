@@ -16,6 +16,7 @@ public abstract class Usuario {
 		this.nome = nome;
 		this.codigo = codigo;
 		this.reservas = new ArrayList<Reserva>(MAX_RESERVAS);
+		Biblioteca.getInstancia().addUsuario(this);
 	}
 	
 

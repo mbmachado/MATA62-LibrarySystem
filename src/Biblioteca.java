@@ -78,6 +78,10 @@ public class Biblioteca {
         System.exit(0);
     }
 
+    public void addUsuario(Usuario u) {usuarios.add(u);}
+
+    public void addLivros(Livro l) {livros.add(l);}
+
     private  Livro obterLivro(int codigoLivro) {
         Optional<Livro> livro =  livros.stream().filter(l -> l.getCodigo() == codigoLivro).findFirst();
         return livro.orElse(null);
