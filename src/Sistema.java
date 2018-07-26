@@ -1,5 +1,3 @@
-package src;
-import src.commands.*;
 
 import java.util.HashMap;
 import java.util.Scanner;
