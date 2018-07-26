@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import commands.*;
 
 public class Sistema {
 
@@ -18,8 +19,8 @@ public class Sistema {
     }
 
 
-    public static void  getCommand(String command, String parametros) {
-         comandos.get(command).execute(parametros);
+    public static void  getCommand(String command) {
+         comandos.get(command).execute();
     }
 
 
@@ -27,9 +28,8 @@ public class Sistema {
         Sistema sis = new Sistema();
         Scanner sc = new Scanner(System.in);
         String c = sc.next();
-        String p = ""; // Explodir sc
         
-        getCommand(c, p);
+        getCommand(c);
 
 	}
 

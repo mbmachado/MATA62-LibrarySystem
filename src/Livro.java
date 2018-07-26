@@ -19,6 +19,46 @@ public class Livro implements Subject {
 		this.anoPublicacao = anoPublicacao;
 		this.editora = editora;
 		this.edicao = edicao;
+		this.reservas = new ArrayList<Reserva>();
+		this.observers = new ArrayList<Observer>();
+		this.exemplares = new ArrayList<Exemplar>();
+	}
+	
+	public Exemplar obterExemplarParaEmprestimo(int index) {
+		Exemplar exemplar = exemplares.get(index);
+		exemplar.setStatus("emprestado");
+		return exemplar;
+	}
+	
+	public int numeroDeExemplaresDisponiveis() {
+		int contador = 0;
+		for (int j = 0; j < exemplares.size(); j++) {	
+			Exemplar exemplar = exemplares.get(j);
+			if(exemplar.getStatus().equals("disponivel")) {
+				contador++;;
+			}
+		}
+		return contador;
+	}
+	
+	public int temReserva(Usuario usuario) {
+		for (int i = 0; i < reservas.size(); i++) {
+			Reserva reserva = reservas.get(i);
+			if(reserva.compareTo(this, usuario)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public int getIndiceExemplarDisponivel() {
+		for (int j = 0; j < exemplares.size(); j++) {	
+			Exemplar exemplar = exemplares.get(j);
+			if(exemplar.getStatus().equals("disponivel")) {
+				return j;
+			}
+		}
+		return -1;
 	}
 	
 	public void adicionarReserva(Reserva reserva) {
@@ -30,6 +70,10 @@ public class Livro implements Subject {
 		if (i >= 0) {
 			reservas.remove(i);
 		}
+	}
+	
+	public void removerReserva(int index) {
+		reservas.remove(index);
 	}
 	
 	public void adicionarExemplar(Exemplar exemplar) {
@@ -124,5 +168,4 @@ public class Livro implements Subject {
 	public void setObservers(ArrayList<Observer> observers) {
 		this.observers = observers;
 	}
-
 }

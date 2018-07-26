@@ -1,18 +1,25 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Emprestimo {
 	private Exemplar exemplar;
 	private Usuario usuario;
-	private Date dataEmprestimo;
-	private Date dataDevolucaoPrevista;
-	private Date dataDevolucaoReal;
+	private LocalDate dataEmprestimo;
+	private LocalDate dataDevolucaoPrevista;
+	private LocalDate dataDevolucaoReal;
 	
-	public Emprestimo(Exemplar exemplar, Usuario usuario, Date dataEmprestimo, Date dataDevolucaoPrevista, Date dataDevolucaoReal) {
+	public Emprestimo(Exemplar exemplar, Usuario usuario, LocalDate dataEmprestimo, LocalDate dataDevolucaoPrevista, LocalDate dataDevolucaoReal) {
 		this.exemplar = exemplar;
 		this.usuario = usuario;
 		this.dataEmprestimo = dataEmprestimo;
 		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
 		this.dataDevolucaoReal = dataDevolucaoReal;
+	}
+	
+	public boolean jaRealizado(Exemplar exemplar) {
+		if((this.exemplar.getLivro()).equals(exemplar.getLivro())) {
+			return true;
+		}
+		return false;
 	}
 	
 	public Exemplar getExemplar() {
@@ -31,27 +38,27 @@ public class Emprestimo {
 		this.usuario = usuario;
 	}
 	
-	public Date getDataEmprestimo() {
+	public LocalDate getDataEmprestimo() {
 		return dataEmprestimo;
 	}
 	
-	public void setDataEmprestimo(Date dataEmprestimo) {
+	public void setDataEmprestimo(LocalDate dataEmprestimo) {
 		this.dataEmprestimo = dataEmprestimo;
 	}
 	
-	public Date getDataDevolucaoPrevista() {
+	public LocalDate getDataDevolucaoPrevista() {
 		return dataDevolucaoPrevista;
 	}
 	
-	public void setDataDevolucaoPrevista(Date dataDevolucaoPrevista) {
+	public void setDataDevolucaoPrevista(LocalDate dataDevolucaoPrevista) {
 		this.dataDevolucaoPrevista = dataDevolucaoPrevista;
 	}
 	
-	public Date getDataDevolucaoReal() {
+	public LocalDate getDataDevolucaoReal() {
 		return dataDevolucaoReal;
 	}
 	
-	public void setDataDevolucaoReal(Date dataDevolucaoReal) {
+	public void setDataDevolucaoReal(LocalDate dataDevolucaoReal) {
 		this.dataDevolucaoReal = dataDevolucaoReal;
 	}
 }

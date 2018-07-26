@@ -8,6 +8,14 @@ public class Professor extends Usuario implements Observer {
 		this.ce = new EmprestimoAluno();
 	}
 	
+	public int getTempoDeEmprestimo() {
+		return tempoDeEmprestimo;
+	}
+	
+	public int getLimiteEmprestimos() {
+		return limiteEmprestimos;
+	}
+	
 	@Override
 	public void update(Subject livro) {
 		// TODO Auto-generated method stub

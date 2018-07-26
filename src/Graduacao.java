@@ -7,4 +7,12 @@ public class Graduacao extends Usuario {
 		super(nome, codigo);
 		this.ce = new EmprestimoAluno();
 	}
+
+	public int getTempoDeEmprestimo() {
+		return tempoDeEmprestimo;
+	}
+	
+	public int getLimiteEmprestimos() {
+		return limiteEmprestimos;
+	}
 }

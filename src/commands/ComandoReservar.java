@@ -1,4 +1,4 @@
-package src.commands;
+package commands;
 
 public class ComandoReservar implements Command {
     public  void execute(){

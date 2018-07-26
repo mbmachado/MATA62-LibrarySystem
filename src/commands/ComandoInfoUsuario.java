@@ -1,4 +1,4 @@
-package src.commands;
+package commands;
 
 public class ComandoInfoUsuario implements Command {
     public  void execute(){
