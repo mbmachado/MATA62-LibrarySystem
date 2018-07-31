@@ -15,12 +15,18 @@ public class Reserva {
 	}
 	
 	public boolean compareTo(Livro livro, Usuario usuario) {
-		if(this.livro == livro && this.usuario == usuario) {
+		if(this.livro.equals(livro) && this.usuario.equals(usuario)) {
 			return true;
 		}
 		return false;
 	}
+	
+	public String toString(){
+	    return "Título: " + this.livro.getTitulo() +  ", Data da solicitação: "
+                + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 
+	/*Setters e Getters*/
 	public LocalDate getData() {
 		return data;
 	}
@@ -44,9 +50,5 @@ public class Reserva {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-
-	public String toString(){
-	    return "Título: " + this.livro.getTitulo() +  ", Data da solicitação: "
-                + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
+	
 }

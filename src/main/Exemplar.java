@@ -24,7 +24,13 @@ public class Exemplar {
 	public void adicionarEmprestimo(Emprestimo emprestimo) {
 		emprestimos.add(emprestimo);
 	}
-
+	
+	public String toString() {
+	    return "Código do livro: " + this.livro.getCodigo() + ", Código do Exemplar: " + this.ID + ", Status: "
+                + this.status;
+    }
+	
+	/*Setters e getters*/
 	public Livro getLivro() {
 		return livro;
 	}
@@ -45,8 +51,4 @@ public class Exemplar {
 		return ID;
 	}
 
-    public String toString() {
-	    return "Código do livro: " + this.livro.getCodigo() + ", Código do Exemplar: " + this.ID + ", Status: "
-                + this.status;
-    }
 }

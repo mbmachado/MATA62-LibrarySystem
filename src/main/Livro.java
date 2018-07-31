@@ -23,15 +23,9 @@ public class Livro implements Subject {
 		this.reservas = new ArrayList<Reserva>();
 		this.observers = new ArrayList<Observer>();
 		this.exemplares = new ArrayList<Exemplar>();
-		Biblioteca.getInstancia().addLivros(this);
+		Biblioteca.getInstancia().addLivro(this);
 	}
-	
-	public Exemplar obterExemplarParaEmprestimo(int index) {
-		Exemplar exemplar = exemplares.get(index);
-		exemplar.setStatus("emprestado");
-		return exemplar;
-	}
-	
+		
 	public int numeroDeExemplaresDisponiveis() {
 		int contador = 0;
 		for (int j = 0; j < exemplares.size(); j++) {	
@@ -63,17 +57,16 @@ public class Livro implements Subject {
 		return -1;
 	}
 	
+	public Exemplar obterExemplarParaEmprestimo(int index) {
+		Exemplar exemplar = exemplares.get(index);
+		exemplar.setStatus("emprestado");
+		return exemplar;
+	}
+	
 	public void adicionarReserva(Reserva reserva) {
 		reservas.add(reserva);
 		if(getReservas().size() > 2) {
 			notifyObservers();
-		}
-	}
-	
-	public void removerReserva(Reserva reserva) {
-		int i = reservas.indexOf(reserva);
-		if (i >= 0) {
-			reservas.remove(i);
 		}
 	}
 	
@@ -95,7 +88,7 @@ public class Livro implements Subject {
 	public void printInfoLivro() {
 	    System.out.println("Título: " + this.titulo);
         System.out.println("Quantidade de reservas: " + this.reservas.size());
-	    if(this.getReservas().size() > 0) {
+	    if(!reservas.isEmpty()) {
 	        System.out.println("Usuários que reservaram: ");
             reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
         }
@@ -128,6 +121,7 @@ public class Livro implements Subject {
 		}
 	}
 
+	/*Setters e Getters*/
 	public String getTitulo() {
 		return titulo;
 	}

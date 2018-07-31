@@ -18,15 +18,24 @@ public class Emprestimo {
 		this.dataDevolucaoReal = dataDevolucaoReal;
 	}
 	
-	public boolean jaRealizado(Exemplar exemplar) {
-		if((this.exemplar.getLivro()).equals(exemplar.getLivro())) {
-			//if(exemplar.getStatus().equals("emprestado")) {
-				return true;
-			//}
-		}
-		return false;
-	}
+	public String toString() {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	    String dataDevolucao;
 
+	    if(dataDevolucaoReal == null) {
+            dataDevolucao = "Data devolução prevista: " + dataDevolucaoPrevista.format(dateFormat);
+        } else {
+	        dataDevolucao = "Data de devolução: " + dataDevolucaoReal.format(dateFormat);
+        }
+
+        String titulo = "Título: " + exemplar.getLivro().getTitulo();
+	    String dataEmprestimo = ", Data do emprestimo: " + this.dataEmprestimo.format(dateFormat);
+        String status = ", Status: " + exemplar.getStatus();
+
+        return titulo + dataEmprestimo + status + dataDevolucao;
+    }
+	
+	/*Setters e Getters*/
 	public Exemplar getExemplar() {
 		return exemplar;
 	}
@@ -52,7 +61,6 @@ public class Emprestimo {
 	}
 	
 	public LocalDate getDataDevolucaoPrevista() {
-        // TODO remover comentÃ¡rio depois de adaptar o mÃ©todo na classe UsuÃ¡rio
 	    return dataDevolucaoPrevista;
 	}
 	
@@ -67,21 +75,4 @@ public class Emprestimo {
 	public void setDataDevolucaoReal(LocalDate dataDevolucaoReal) {
 		this.dataDevolucaoReal = dataDevolucaoReal;
 	}
-
-	public String toString() {
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	    String dataDevolucao;
-
-	    if(dataDevolucaoReal == null) {
-            dataDevolucao = "Data devolução prevista: " + dataDevolucaoPrevista.format(dateFormat);
-        } else {
-	        dataDevolucao = "Data de devolução: " + dataDevolucaoReal.format(dateFormat);
-        }
-
-        String titulo = "Título: " + exemplar.getLivro().getTitulo();
-	    String dataEmprestimo = ", Data do emprestimo: " + this.dataEmprestimo.format(dateFormat);
-        String status = ", Status: " + exemplar.getStatus();
-
-        return titulo + dataEmprestimo + status + dataDevolucao;
-    }
 }
