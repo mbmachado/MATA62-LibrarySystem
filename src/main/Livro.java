@@ -181,6 +181,5 @@ public class Livro implements Subject {
 	public void setObservers(ArrayList<Observer> observers) {
 		this.observers = observers;
 	}
-
 	
 }

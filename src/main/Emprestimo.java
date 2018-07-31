@@ -17,6 +17,15 @@ public class Emprestimo {
 		this.dataDevolucaoReal = dataDevolucaoReal;
 	}
 	
+	public boolean tentarDevolver(Livro livro) {
+		if(this.getExemplar().getLivro().equals(livro)) {
+			this.setDataDevolucaoReal(LocalDate.now());
+            this.getExemplar().setStatus("disponivel");
+            return true; 
+		}
+		return false;
+	}
+	
 	public String toString() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	    String dataDevolucao;

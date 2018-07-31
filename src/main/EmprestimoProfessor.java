@@ -9,11 +9,11 @@ public class EmprestimoProfessor implements ComportamentoEmprestar {
 		int indiceExemplarDisponivel = livro.getIndiceExemplarDisponivel();
 		
 		if(usuario.numeroEmprestimosEmAtraso() > 0) {
-			System.out.println("Nãoo foi possível efetuar emprestimo. Usuário está em débito!");
+			System.out.println("Não foi possível efetuar emprestimo. Usuário está em débito!");
 		} else {
 			if(indiceExemplarDisponivel != -1) { // Há exemplar disponível?
 				if(usuario.possuiEmprestimo(livro)) {
-					System.out.println("Nãoo foi possível efetuar emprestimo. Um Exemplar do livro já se encontra em emprestimo!");
+					System.out.println("Não foi possível efetuar emprestimo. Um Exemplar do livro já se encontra em emprestimo!");
 				} else {
 					exemplar = livro.obterExemplarParaEmprestimo(indiceExemplarDisponivel);
 					

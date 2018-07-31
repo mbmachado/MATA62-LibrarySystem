@@ -96,15 +96,12 @@ public abstract class Usuario {
 		if(this.possuiEmprestimo(livro)) {
 			for (int i = 0; i < emprestimos.size(); i++) {
 	            Emprestimo emprestimo = emprestimos.get(i);
-	            if (emprestimo.getExemplar().getLivro().equals(livro)) { // Aplicar expert aqui
+	            if(emprestimo.tentarDevolver(livro)) {
 	            	this.removerEmprestimo(emprestimo);
-	                emprestimo.setDataDevolucaoReal(LocalDate.now());
-	                emprestimo.getExemplar().setStatus("disponivel");
-	                this.adicionarHistorico(emprestimo);
+	            	this.adicionarHistorico(emprestimo);
 	                break;
 	            }
 	        }
-			
 			System.out.println("Exemplar do livro devolvido!");
 		} else {
 			System.out.println("Não foi possível devolver, pois nunhum exemplar do livro foi emprestado!");
