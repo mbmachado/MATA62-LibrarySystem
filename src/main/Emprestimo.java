@@ -29,7 +29,7 @@ public class Emprestimo {
 
         String titulo = "Título: " + exemplar.getLivro().getTitulo();
 	    String dataEmprestimo = ", Data do emprestimo: " + this.dataEmprestimo.format(dateFormat);
-        String status = ", Status: " + exemplar.getStatus();
+        String status = ", Status: " + exemplar.getStatus()+", ";
 
         return titulo + dataEmprestimo + status + dataDevolucao;
     }

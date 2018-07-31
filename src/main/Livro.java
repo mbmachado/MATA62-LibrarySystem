@@ -90,12 +90,13 @@ public class Livro implements Subject {
 	    if(!reservas.isEmpty()) {
 	        System.out.println("Usuários que reservaram: ");
             reservas.forEach(r -> System.out.println(r.getUsuario().getNome()));
-        }
-
+        } 
 	    if(!exemplares.isEmpty()) {
 	        System.out.println("Exemplares");
 	        exemplares.forEach(e -> System.out.println(e));
-	    }
+	    } else {
+    		System.out.println("Livro sem exemplares!");
+        }
     }
 	
 	@Override

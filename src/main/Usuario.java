@@ -14,7 +14,9 @@ public abstract class Usuario {
 	public Usuario(String nome, int codigo) {
 		this.nome = nome;
 		this.codigo = codigo;
-		this.reservas = new ArrayList<Reserva>(MAX_RESERVAS);
+		this.reservas = new ArrayList<Reserva>();
+		this.emprestimos = new ArrayList<Emprestimo>();
+		this.historico = new ArrayList<Emprestimo>();
 		Biblioteca.getInstancia().addUsuario(this);
 	}
 	
@@ -35,7 +37,7 @@ public abstract class Usuario {
 	}
 	
 	public void adicionarHistorico(Emprestimo emprestimo) {
-		emprestimos.add(emprestimo);
+		historico.add(emprestimo);
 	}
 	
 	public int numeroEmprestimosAtivos() {
@@ -95,7 +97,7 @@ public abstract class Usuario {
 			for (int i = 0; i < emprestimos.size(); i++) {
 	            Emprestimo emprestimo = emprestimos.get(i);
 	            if (emprestimo.getExemplar().getLivro().equals(livro)) { // Aplicar expert aqui
-	                this.removerEmprestimo(emprestimo);
+	            	this.removerEmprestimo(emprestimo);
 	                emprestimo.setDataDevolucaoReal(LocalDate.now());
 	                emprestimo.getExemplar().setStatus("disponivel");
 	                this.adicionarHistorico(emprestimo);
@@ -115,14 +117,20 @@ public abstract class Usuario {
 		if(!emprestimos.isEmpty()) {
 			System.out.println("Emprestimos Ativos");
 			emprestimos.forEach(a -> System.out.println(a));
+		} else {
+			System.out.println("Usuário sem emprestimos ativos!");
 		}
 		if(!historico.isEmpty()) {
 			System.out.println("Históricos de Emprestimos");
-			historico.forEach(p -> System.out.println(p));
+			historico.forEach(h -> System.out.println(h));
+		} else {
+			System.out.println("Usuário sem histórico!");
 		}
 		if(!reservas.isEmpty()) {
 			System.out.println("Reservas");
 			reservas.forEach(r -> System.out.println(r));
+		} else {
+			System.out.println("Usuário sem reservas!");
 		}
     }
 	

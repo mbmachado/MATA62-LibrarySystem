@@ -57,9 +57,11 @@ public class Sistema {
 		Exemplar exm7 = new Exemplar(7, liv5);
 		Exemplar exm8 = new Exemplar(8, liv7);
 		Exemplar exm9 = new Exemplar(9, liv7);
+		Exemplar exm10 = new Exemplar(10, liv1);
 		
 		liv1.adicionarExemplar(exm1);
 		liv1.adicionarExemplar(exm2);
+		liv1.adicionarExemplar(exm10);
 		liv2.adicionarExemplar(exm3);
 		liv3.adicionarExemplar(exm4);
 		liv4.adicionarExemplar(exm5);
