@@ -1,14 +1,11 @@
 package main;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 import commands.*;
-
 
 public class Sistema {
 
-    public static HashMap<String, Command> comandos = new HashMap<String, Command>();
-
+    private HashMap<String, Command> comandos = new HashMap<String, Command>();
 
     public Sistema() {
         comandos.put("emp", new ComandoEmprestar());
@@ -21,8 +18,7 @@ public class Sistema {
         comandos.put("sai", new ComandoSair());
     }
 
-
-    public static void  getCommand(String entrada) {
+    public void getCommand(String entrada) throws IndexOutOfBoundsException {
 
     	String[] s = entrada.split("\\s+", 2);
         try {
@@ -36,8 +32,7 @@ public class Sistema {
     }
 
 	public static void main(String[] args) {
-        Sistema sis = new Sistema();
-        Biblioteca biblioteca = Biblioteca.getInstancia();
+        Sistema sistema = new Sistema();
         
 		Usuario usr1 = new Graduacao("João da Silva", 123);
 		Usuario usr2 = new PosGraduacao("Luiz Fernando Rodrigues", 456);
@@ -77,10 +72,7 @@ public class Sistema {
 
         while (true) {
             String c = sc.nextLine();
-            getCommand(c);
-
-        }
-
+            sistema.getCommand(c);
+        } 
 	}
-
 }

@@ -1,5 +1,4 @@
 package main;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Livro implements Subject {

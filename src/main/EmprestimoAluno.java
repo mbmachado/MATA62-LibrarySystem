@@ -1,5 +1,4 @@
 package main;
-import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class EmprestimoAluno implements ComportamentoEmprestar {
